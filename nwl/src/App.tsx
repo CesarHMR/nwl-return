@@ -3,13 +3,13 @@ import { WidgetWindow } from "./components/WidgetWindow"
 import { useState } from "react"
 
 export function App() {
-  const [isWidgetOpen, setWidgetState] = useState(true)
-
+  
   function ToggleWidgetState(){
-    (document.getElementById("widget-window") as HTMLDivElement).className = `widget-window ${!isWidgetOpen}`;
-    setWidgetState(!isWidgetOpen);
+    let window = (document.getElementById("widget-window") as HTMLDivElement)
+    let state = window.className == 'widget-window true' ? 'false' : 'true'
+    window.className = `widget-window ${state}`;
+    console.log(state)
   }
-
 
   return (
     

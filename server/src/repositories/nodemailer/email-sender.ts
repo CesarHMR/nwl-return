@@ -8,7 +8,7 @@ interface IMailData{
 }
 
 interface IMailManager{
-    sendEmail: (data: IMailData) => Promise<void>
+    sendMail: (data: IMailData) => Promise<void>
 }
 
 const transport = nodemailer.createTransport({
@@ -25,7 +25,7 @@ export class MailManager implements IMailManager{
 
     }
     
-    async sendEmail(data: IMailData){
+    async sendMail(data: IMailData){
         const { from, to, subject, html } = data
         
         await transport.sendMail({

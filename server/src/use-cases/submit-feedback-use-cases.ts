@@ -12,8 +12,20 @@ export class SubmitFeedback{
     async execute(request: FeedbackData){
         const { type, comment, screenshot } = request
 
+        if(screenshot && !screenshot.startsWith('data:image/png;base64')){
+            throw new Error('Invalid screenshot format!')
+        }
+
+        if(!type){
+            throw new Error('Type is required!')
+        }
+
+        if(!comment){
+            throw new Error('Comment is required!')
+        }
+
         await this.feedbacksRepository.create({ type, comment, screenshot })
-        await this.mailManager.sendEmail({
+        await this.mailManager.sendMail({
             from:   'Equipe Feedget <chmr.interprise@gmail.com>',
             to:     'Cesar Henrique <chmr.developer@gmail.com>',
             subject:'New feedback',
